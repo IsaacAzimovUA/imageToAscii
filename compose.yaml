@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: ./app
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+  api:
+    build:
+      context: ./api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/api
