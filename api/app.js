@@ -5,12 +5,19 @@ const imageRouter = require('./routes/imageRouter');
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler.js');
 
 app.use(express.json());
 app.use(cors());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+  })
+);
 
 // routes
 app.get('/', (_req, res) => res.send('<h1>Image to ASCII API</h1>'));
