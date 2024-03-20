@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const {
-  convertToImage,
-  uploadImage,
-} = require('../controllers/imageController');
+const { convertToImage } = require('../controllers/imageController');
 
-router.route('/').get(convertToImage);
-router.route('/upload').post(uploadImage);
+router.route('/convert').post(convertToImage);
 
 module.exports = router;
