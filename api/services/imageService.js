@@ -10,9 +10,8 @@ const DROPBOX_OPTIONS = {
 };
 
 const convertToAscii = async (imageFile, options) => {
-  console.log('convertToAscii ~ options:', options);
   return new Promise((resolve, rejected) => {
-    asciifyImage(imageFile, options, (error, asciified) => {
+    asciifyImage(imageFile, options || DEFAULT_OPTIONS, (error, asciified) => {
       if (error) {
         rejected(error);
       } else {
