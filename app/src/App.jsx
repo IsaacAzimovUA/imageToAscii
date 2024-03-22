@@ -21,7 +21,6 @@ function App() {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-        data: form,
       });
       setImage(response.data.payload);
     } catch (error) {
