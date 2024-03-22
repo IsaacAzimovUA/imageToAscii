@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import instance from '../axios';
+import axiosInstance from '../axios';
+import { Header, Footer } from './components';
 
 function App() {
   const [image, setImage] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [imageOptions, getImageOptions] = useState([]);
-  const [form, setForm] = useState({});
+  const [options, setOptions] = useState({});
 
   const handleFileSelect = (e) => {
     setImageFile(e.target.files[0]);
@@ -14,14 +15,13 @@ function App() {
     e.preventDefault();
     const formData = new FormData();
     formData.append('imageFile', imageFile);
-    formData.append('options', JSON.stringify(form));
+    formData.append('options', JSON.stringify(options));
 
     try {
-      const response = await instance.post('/api/v1/image/convert', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axiosInstance.post(
+        '/api/v1/image/convert',
+        formData
+      );
       setImage(response.data.payload);
     } catch (error) {
       console.log(error);
@@ -29,7 +29,7 @@ function App() {
   };
 
   const handleChange = (e) => {
-    setForm((prev) => {
+    setOptions((prev) => {
       return {
         ...prev,
         [e.target.name]: e.target.value,
@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await instance.get('/api/v1/image');
+        const response = await axiosInstance.get('/api/v1/image');
         getImageOptions(response.data.fit);
       } catch (error) {
         console.log(error);
@@ -51,6 +51,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <h1>Front</h1>
       <form
         id="uploadForm"
@@ -83,6 +84,7 @@ function App() {
       </form>
 
       {image ? <pre>{image}</pre> : <p>upload an image</p>}
+      <Footer />
     </>
   );
 }
