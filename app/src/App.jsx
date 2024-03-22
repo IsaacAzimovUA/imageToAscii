@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import axiosInstance from '../axios';
 import { Header, Footer } from './components';
+import axiosInstance from '../axios';
+import useLocalStorage from 'use-local-storage';
 
 function App() {
   const [image, setImage] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [imageOptions, getImageOptions] = useState([]);
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useLocalStorage({});
 
   const handleFileSelect = (e) => {
     setImageFile(e.target.files[0]);
@@ -60,7 +61,7 @@ function App() {
       >
         <label>
           The fit to resize the image to
-          <select name="fit" onChange={handleChange}>
+          <select name="fit" value={options.fit} onChange={handleChange}>
             <option>Please choose an option</option>
             {imageOptions.map((option, index) => {
               return (
@@ -73,11 +74,21 @@ function App() {
         </label>
         <label>
           width:
-          <input name="width" type="number" onChange={handleChange} />
+          <input
+            name="width"
+            type="number"
+            value={options.width}
+            onChange={handleChange}
+          />
         </label>
         <label>
           height:
-          <input name="height" type="number" onChange={handleChange} />
+          <input
+            name="height"
+            type="number"
+            value={options.height}
+            onChange={handleChange}
+          />
         </label>
         <input type="file" id="file" name="file" onChange={handleFileSelect} />
         <input type="submit" value="Upload File" />
