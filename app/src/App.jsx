@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Header,
-  Container,
-  Footer,
-  InputField,
-  SelectField,
-} from './components';
+import { Header, Container, InputField, SelectField } from './components';
 import axiosInstance from '../axios';
 import useLocalStorage from 'use-local-storage';
 
@@ -126,8 +120,6 @@ function App() {
           {image ? <pre>{image}</pre> : <p>Upload an image</p>}
         </Container>
       </main>
-
-      {/* <Footer /> */}
     </>
   );
 }
