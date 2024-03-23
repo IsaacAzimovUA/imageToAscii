@@ -8,6 +8,7 @@ function App() {
   const [imageFile, setImageFile] = useState(null);
   const [imageOptions, getImageOptions] = useState([]);
   const [options, setOptions] = useLocalStorage({});
+  const [clipboard, setClipboard] = useState(null);
 
   const handleFileSelect = (e) => {
     setImageFile(e.target.files[0]);
@@ -52,8 +53,12 @@ function App() {
   const clickHandler = async () => {
     try {
       await navigator.clipboard.writeText(image);
+      if (image) {
+        setClipboard('Saved to clipboard');
+        setTimeout(() => setClipboard(null), 1500);
+      }
     } catch (err) {
-      console.error('Failed to copy: ', err);
+      setClipboard(`Failed to copy: ${err}`);
     }
   };
 
@@ -105,19 +110,23 @@ function App() {
               type="submit"
               className="mr-3 inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
-              Submit
+              Convert
             </button>
             <button
               onClick={clickHandler}
               type="button"
               className="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"
             >
-              Copy To Clipboard
+              {clipboard ? clipboard : 'Copy To Clipboard'}
             </button>
           </form>
         </Container>
         <Container maxWidth="max-w-fit overflow-scroll">
-          {image ? <pre>{image}</pre> : <p>Upload an image</p>}
+          {image ? (
+            <pre>{image}</pre>
+          ) : (
+            <p className="text-red-400">Upload an image</p>
+          )}
         </Container>
       </main>
     </>
