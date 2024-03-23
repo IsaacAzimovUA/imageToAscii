@@ -11,7 +11,7 @@ const Header = () => {
               <img
                 className="h-9 w-auto"
                 src={Logo}
-                no-referrer
+                no-referrer="true"
                 alt="asciify"
               />
             </a>

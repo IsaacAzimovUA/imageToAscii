@@ -8,7 +8,7 @@ const Button = ({ style, children, type, onClick, href, target }) => {
         target={target}
         className={`${style} mr-3 inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-semibold shadow-sm transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
         onClick={onClick}
-        no-referrer
+        no-referrer="true"
       >
         {children}
       </a>
