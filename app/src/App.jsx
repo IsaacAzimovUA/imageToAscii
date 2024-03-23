@@ -13,7 +13,11 @@ function App() {
   const [image, setImage] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [imageOptions, getImageOptions] = useState([]);
-  const [options, setOptions] = useLocalStorage({});
+  const [options, setOptions] = useLocalStorage('options', {
+    width: '',
+    height: '',
+    fit: '',
+  });
   const [clipboard, setClipboard] = useState(null);
 
   const handleFileSelect = (e) => {
