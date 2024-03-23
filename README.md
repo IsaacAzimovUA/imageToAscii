@@ -30,7 +30,13 @@ To run the project locally, follow these steps:
 1. Clone this repository.
 2. Navigate to the project directory.
 3. Ensure you have Docker installed on your system.
-4. Run `docker-compose up` to build and start the containers.
+4. Run the following commands:
+   - `cd app`
+   - `npm install`
+   - `cd ../api`
+   - `npm install`
+   - `cd ..`
+   - `docker-compose up`
 
 ## Usage
 
