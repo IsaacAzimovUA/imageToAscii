@@ -87,15 +87,8 @@ function App() {
               name="fit"
               value={options.fit}
               onChange={handleChange}
-            >
-              {imageOptions.map((option, index) => {
-                return (
-                  <option key={index} value={option}>
-                    {option}
-                  </option>
-                );
-              })}
-            </SelectField>
+              imageOptions={imageOptions}
+            />
             <InputField
               label="width"
               name="width"
@@ -139,7 +132,7 @@ function App() {
           {image ? (
             <pre>{image}</pre>
           ) : (
-            <p className="text-red-400">Upload an image</p>
+            <p className="text-red-600">Upload an image</p>
           )}
         </Container>
       </main>

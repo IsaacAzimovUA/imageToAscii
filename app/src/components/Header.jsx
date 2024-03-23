@@ -13,6 +13,8 @@ const Header = () => {
                 src={Logo}
                 no-referrer="true"
                 alt="asciify"
+                width="100"
+                height="50"
               />
             </a>
           </div>

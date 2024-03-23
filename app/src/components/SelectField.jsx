@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-const SelectField = ({ label, name, value, onChange, children }) => {
+const SelectField = ({ label, name, value, onChange, imageOptions }) => {
+  const memoizedOptions = useMemo(() => {
+    // Memoize options to prevent unnecessary re-renders
+    return imageOptions.map((option, index) => (
+      <option key={index} value={option}>
+        {option}
+      </option>
+    ));
+  }, [imageOptions]);
   return (
     <div className="mb-4">
       <label
@@ -16,8 +24,10 @@ const SelectField = ({ label, name, value, onChange, children }) => {
         id={name}
         name={name}
       >
-        <option defaultChecked>Please choose an option</option>
-        {children}
+        <option value="" defaultChecked>
+          Please choose an option
+        </option>
+        {memoizedOptions}
       </select>
     </div>
   );
