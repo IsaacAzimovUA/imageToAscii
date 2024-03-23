@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Header, Footer } from './components';
+import {
+  Header,
+  Container,
+  Footer,
+  InputField,
+  SelectField,
+} from './components';
 import axiosInstance from '../axios';
 import useLocalStorage from 'use-local-storage';
 
@@ -49,53 +55,79 @@ function App() {
     };
     fetchData();
   }, []);
+  const clickHandler = async () => {
+    try {
+      await navigator.clipboard.writeText(image);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
 
   return (
     <>
       <Header />
-      <h1>Front</h1>
-      <form
-        id="uploadForm"
-        encType="multipart/form-data"
-        onSubmit={handleSubmit}
-      >
-        <label>
-          The fit to resize the image to
-          <select name="fit" value={options.fit} onChange={handleChange}>
-            <option>Please choose an option</option>
-            {imageOptions.map((option, index) => {
-              return (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        <label>
-          width:
-          <input
-            name="width"
-            type="number"
-            value={options.width}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          height:
-          <input
-            name="height"
-            type="number"
-            value={options.height}
-            onChange={handleChange}
-          />
-        </label>
-        <input type="file" id="file" name="file" onChange={handleFileSelect} />
-        <input type="submit" value="Upload File" />
-      </form>
+      <main className="mt-28">
+        <Container maxWidth="max-w-screen-md lg:max-w-screen-lg">
+          <form
+            id="uploadForm"
+            encType="multipart/form-data"
+            onSubmit={handleSubmit}
+          >
+            <SelectField
+              label="fit"
+              name="fit"
+              value={options.fit}
+              onChange={handleChange}
+            >
+              {imageOptions.map((option, index) => {
+                return (
+                  <option key={index} value={option}>
+                    {option}
+                  </option>
+                );
+              })}
+            </SelectField>
+            <InputField
+              label="width"
+              name="width"
+              type="number"
+              value={options.width}
+              onChange={handleChange}
+            />
+            <InputField
+              label="height"
+              name="height"
+              type="number"
+              value={options.height}
+              onChange={handleChange}
+            />
+            <InputField
+              type="file"
+              id="file"
+              name="file"
+              onChange={handleFileSelect}
+            />
+            <button
+              type="submit"
+              className="mr-3 inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >
+              Submit
+            </button>
+            <button
+              onClick={clickHandler}
+              type="button"
+              className="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"
+            >
+              Copy To Clipboard
+            </button>
+          </form>
+        </Container>
+        <Container maxWidth="max-w-fit overflow-scroll">
+          {image ? <pre>{image}</pre> : <p>Upload an image</p>}
+        </Container>
+      </main>
 
-      {image ? <pre>{image}</pre> : <p>upload an image</p>}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
