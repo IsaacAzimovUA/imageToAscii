@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Header, Container, InputField, SelectField } from './components';
+import {
+  Header,
+  Container,
+  InputField,
+  SelectField,
+  Button,
+} from './components';
 import axiosInstance from '../axios';
 import useLocalStorage from 'use-local-storage';
 
@@ -106,19 +112,23 @@ function App() {
               name="file"
               onChange={handleFileSelect}
             />
-            <button
+            <Button
+              style={
+                'bg-blue-600 text-white hover:bg-blue-500 focus-visible:outline-blue-600'
+              }
               type="submit"
-              className="mr-3 inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
               Convert
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={clickHandler}
+              style={
+                'bg-white text-gray-900 ring-gray-300 hover:bg-gray-50 sm:inline-flex shadow-sm ring-1'
+              }
               type="button"
-              className="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"
             >
               {clipboard ? clipboard : 'Copy To Clipboard'}
-            </button>
+            </Button>
           </form>
         </Container>
         <Container maxWidth="max-w-fit overflow-scroll">
