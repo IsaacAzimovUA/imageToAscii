@@ -31,6 +31,7 @@ To run the project locally, follow these steps:
 2. Navigate to the project directory.
 3. Ensure you have Docker installed on your system.
 4. Run the following commands:
+   - `cd imageToAscii/`
    - `cd api; npm i; cd ..; cd app; npm i; cd ..`
    - `docker-compose up`
 
