@@ -146,7 +146,7 @@ function App() {
             {image ? (
               <pre>{image}</pre>
             ) : (
-              <p className="text-red-600">Upload an image</p>
+              <p className="text-red-600">Upload and click convert</p>
             )}
           </Container>
         )}
