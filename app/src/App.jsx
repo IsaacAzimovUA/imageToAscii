@@ -104,10 +104,17 @@ function App() {
               onChange={handleChange}
             />
             <InputField
+              label="file"
               type="file"
               id="file"
               name="file"
               onChange={handleFileSelect}
+              style="block w-full text-sm text-slate-500
+              file:mr-4 file:py-2 file:px-4 file:rounded-br-md
+              file:rounded-tr-md
+              file:border-0 file:text-sm file:font-semibold
+              file:bg-blue-600 file:text-white
+              hover:file:outline-blue-600 hover:file:bg-blue-500 file:cursor-pointer cursor-pointer"
             />
             <Button
               style={

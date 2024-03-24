@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputField = ({ label, name, type, value, onChange }) => {
+const InputField = ({ label, name, type, value, onChange, style }) => {
   return (
     <div className="mb-4">
       <label
@@ -10,7 +10,9 @@ const InputField = ({ label, name, type, value, onChange }) => {
         {label}
       </label>
       <input
-        className="appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className={`${
+          style || 'py-2 px-3'
+        } appearance-none border border-gray-400 rounded w-full  text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
         type={type}
         value={value}
         onChange={onChange}

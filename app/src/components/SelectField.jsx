@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 
 const SelectField = ({ label, name, value, onChange, imageOptions }) => {
   const memoizedOptions = useMemo(() => {
-    // Memoize options to prevent unnecessary re-renders
     return imageOptions.map((option, index) => (
       <option key={index} value={option}>
         {option}
