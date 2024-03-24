@@ -5,6 +5,7 @@ import {
   InputField,
   SelectField,
   Button,
+  Loader,
 } from './components';
 import axiosInstance from '../axios';
 import useLocalStorage from 'use-local-storage';
@@ -19,6 +20,7 @@ function App() {
     fit: '',
   });
   const [clipboard, setClipboard] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFileSelect = (e) => {
     setImageFile(e.target.files[0]);
@@ -30,6 +32,7 @@ function App() {
     formData.append('options', JSON.stringify(options));
 
     try {
+      setLoading(true);
       const response = await axiosInstance.post(
         '/api/v1/image/convert',
         formData
@@ -38,6 +41,7 @@ function App() {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
 
   const handleChange = (e) => {
@@ -75,7 +79,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="mt-28">
+      <main className="mt-20 md:mt-28">
         <Container maxWidth="max-w-screen-md lg:max-w-screen-lg">
           <form
             id="uploadForm"
@@ -135,13 +139,17 @@ function App() {
             </Button>
           </form>
         </Container>
-        <Container maxWidth="max-w-fit overflow-scroll">
-          {image ? (
-            <pre>{image}</pre>
-          ) : (
-            <p className="text-red-600">Upload an image</p>
-          )}
-        </Container>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Container maxWidth="max-w-fit overflow-scroll">
+            {image ? (
+              <pre>{image}</pre>
+            ) : (
+              <p className="text-red-600">Upload an image</p>
+            )}
+          </Container>
+        )}
       </main>
     </>
   );
