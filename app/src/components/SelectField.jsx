@@ -17,7 +17,7 @@ const SelectField = ({ label, name, value, onChange, imageOptions }) => {
         {label}
       </label>
       <select
-        className="appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="bg-white appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         value={value}
         onChange={onChange}
         id={name}

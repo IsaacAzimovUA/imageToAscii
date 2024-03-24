@@ -10,9 +10,10 @@ const InputField = ({ label, name, type, value, onChange, style }) => {
         {label}
       </label>
       <input
+        style={{ appearance: 'textfield' }}
         className={`${
           style || 'py-2 px-3'
-        } appearance-none border border-gray-400 rounded w-full  text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+        }  appearance-none border border-gray-400 rounded w-full  text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
         type={type}
         value={value}
         onChange={onChange}
