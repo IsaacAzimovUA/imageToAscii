@@ -9,6 +9,8 @@ COPY package*.json ./
 RUN npm ci
 COPY . . 
 
-EXPOSE 3000
+ARG API_PORT
+ENV API_PORT=${API_PORT}
+EXPOSE ${API_PORT}
 
 CMD ["npm", "start"]
