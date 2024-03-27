@@ -1,8 +1,8 @@
+const { StatusCodes } = require('http-status-codes');
+
 const errorHandlerMiddleware = async (err, _req, res, _next) => {
-  console.log(err);
-  return res
-    .status(500)
-    .json({ msg: 'Something went wrong, please try again' });
+  console.log('errorHandlerMiddleware ~ err:', err);
+  return res.status(StatusCodes.NOT_FOUND).json({ msg: err.message });
 };
 
 module.exports = errorHandlerMiddleware;

@@ -23,9 +23,6 @@ const SelectField = ({ label, name, value, onChange, imageOptions }) => {
         id={name}
         name={name}
       >
-        <option value="" defaultChecked>
-          Please choose an option
-        </option>
         {memoizedOptions}
       </select>
     </div>

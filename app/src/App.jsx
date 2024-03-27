@@ -22,6 +22,7 @@ function App() {
     height: '',
     fit: '',
   });
+  const [error, setError] = useState('upload image');
   const [loading, setLoading] = useState(false);
 
   const handleFileSelect = (e) => {
@@ -40,8 +41,9 @@ function App() {
         formData
       );
       setImage(response.data.payload);
+      setError(false);
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.msg);
     }
     setLoading(false);
   };
@@ -70,20 +72,22 @@ function App() {
     try {
       if (image) {
         await navigator.clipboard.writeText(image);
-        toast('Saved To Clipboard', {
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-        });
+        toast('Saved To Clipboard');
       }
     } catch (err) {
-      console.log();
+      console.log(err);
     }
   };
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar="true"
+        closeOnClick="true"
+        pauseOnHover="false"
+      />
       <Header />
       <main className="mt-20 md:mt-28">
         <Container maxWidth="max-w-screen-md lg:max-w-screen-lg">
@@ -149,10 +153,10 @@ function App() {
           <Loader />
         ) : (
           <Container maxWidth="max-w-fit overflow-scroll">
-            {image ? (
-              <pre>{image}</pre>
+            {error ? (
+              <p className="text-red-600 capitalize">{error}</p>
             ) : (
-              <p className="text-red-600">Upload and click convert</p>
+              <pre>{image}</pre>
             )}
           </Container>
         )}

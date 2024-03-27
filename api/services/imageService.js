@@ -6,7 +6,7 @@ const DEFAULT_OPTIONS = {
   height: 50,
 };
 const DROPBOX_OPTIONS = {
-  fit: ['box', 'width', 'height', 'original'],
+  fit: ['original', 'width', 'height', 'box'],
 };
 
 const convertToAscii = async (imageFile, options) => {
