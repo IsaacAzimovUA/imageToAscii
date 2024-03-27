@@ -10,6 +10,9 @@ import {
 import axiosInstance from '../axios';
 import useLocalStorage from 'use-local-storage';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const [image, setImage] = useState('');
   const [imageFile, setImageFile] = useState(null);
@@ -19,7 +22,6 @@ function App() {
     height: '',
     fit: '',
   });
-  const [clipboard, setClipboard] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleFileSelect = (e) => {
@@ -66,18 +68,22 @@ function App() {
   }, []);
   const clickHandler = async () => {
     try {
-      await navigator.clipboard.writeText(image);
       if (image) {
-        setClipboard('Saved to clipboard');
-        setTimeout(() => setClipboard(null), 1500);
+        await navigator.clipboard.writeText(image);
+        toast('Saved To Clipboard', {
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+        });
       }
     } catch (err) {
-      setClipboard(`Failed to copy: ${err}`);
+      console.log();
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <Header />
       <main className="mt-20 md:mt-28">
         <Container maxWidth="max-w-screen-md lg:max-w-screen-lg">
@@ -135,7 +141,7 @@ function App() {
               }
               type="button"
             >
-              {clipboard ? clipboard : 'Copy To Clipboard'}
+              Copy To Clipboard
             </Button>
           </form>
         </Container>
