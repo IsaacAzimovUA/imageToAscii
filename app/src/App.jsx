@@ -7,7 +7,7 @@ import {
   Button,
   Loader,
 } from './components';
-import axiosInstance from '../axios';
+import axiosInstance from './axios';
 import useLocalStorage from 'use-local-storage';
 
 import { ToastContainer, toast } from 'react-toastify';
