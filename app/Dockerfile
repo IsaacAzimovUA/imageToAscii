@@ -9,6 +9,13 @@ COPY package*.json ./
 RUN npm ci
 COPY . . 
 
-EXPOSE 8000
+ARG APP_PORT
+ARG API_PORT
+
+ENV APP_PORT=${APP_PORT}
+ENV API_PORT=${API_PORT}
+
+EXPOSE ${APP_PORT}
+
 
 CMD ["npm", "run", "dev"]

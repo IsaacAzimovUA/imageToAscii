@@ -2,8 +2,11 @@ services:
   app:
     build:
       context: ./app
+      args:
+        - APP_PORT=${APP_PORT}
+        - API_PORT=${API_PORT}
     ports:
-      - 8000:8000
+      - '${APP_PORT}:${APP_PORT}'
     volumes:
       - ./app:/app
       - /app/node_modules
