@@ -2,6 +2,7 @@ services:
   app:
     build:
       context: ./app
+      dockerfile: Dockerfile.prod
       args:
         - API_PORT=${API_PORT}
     ports:
@@ -11,5 +12,5 @@ services:
     build:
       context: ./api
     ports:
-      - '${API_PORT}:3001'
+      - '${API_PORT}:80'
     restart: unless-stopped

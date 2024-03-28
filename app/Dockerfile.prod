@@ -1,0 +1,17 @@
+#Step #1 build stage
+FROM node:20.11.1-alpine3.19 AS build-stage
+WORKDIR /app
+COPY package*.json ./ 
+RUN npm ci
+COPY . . 
+ARG API_PORT
+ENV API_PORT=${API_PORT}
+RUN npm run build
+
+#Step #2 Production stage
+FROM nginx:1.25.4-alpine
+RUN addgroup app && adduser -S -G app app
+USER app
+COPY --from=build-stage /app/dist /usr/share/nginx/html 
+EXPOSE 80
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
