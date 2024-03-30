@@ -1,5 +1,7 @@
 require('express-async-errors');
 require('dotenv').config();
+const https = require('https');
+const fs = require('fs');
 
 const imageRouter = require('./routes/imageRouter');
 
@@ -21,7 +23,7 @@ app.use(
 );
 
 // routes
-app.get('/', (_req, res) => res.send('<h1>Image to ASCII API</h1>'));
+app.get('/home', (_req, res) => res.send('<h1>Image to ASCII API</h1>'));
 app.use('/api/v1/image', imageRouter);
 
 //product routes
@@ -31,11 +33,13 @@ app.use(errorHandlerMiddleware);
 //vars
 const port = process.env.API_PORT;
 
-const start = async () => {
-  try {
-    app.listen(port, console.log(`Server listen on port ${port}...`));
-  } catch (error) {
-    console.log(error);
-  }
+const httpOptions = {
+  key: fs.readFileSync('./privkey.pem'),
+  cert: fs.readFileSync('./fullchain.pem'),
 };
-start();
+
+const server = https.createServer(httpOptions, app);
+
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}...`);
+});
