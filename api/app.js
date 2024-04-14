@@ -34,8 +34,8 @@ app.use(errorHandlerMiddleware);
 const port = process.env.API_PORT;
 
 const httpOptions = {
-  key: fs.readFileSync('./privkey.pem'),
-  cert: fs.readFileSync('./fullchain.pem'),
+  key: fs.readFileSync('./ssl/privkey.pem'),
+  cert: fs.readFileSync('./ssl/fullchain.pem'),
 };
 
 const server = https.createServer(httpOptions, app);

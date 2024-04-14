@@ -13,6 +13,10 @@ FROM nginx:1.25.4-alpine
 # RUN addgroup app && adduser -S -G app app
 # USER app
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY /ssl/fullchain.pem /etc/letsencrypt/live/asciify.undo.it/fullchain.pem
+COPY /ssl/privkey.pem /etc/letsencrypt/live/asciify.undo.it/privkey.pem
+
 COPY --from=build-stage /app/dist /usr/share/nginx/html 
 EXPOSE 80
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
